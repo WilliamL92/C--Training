@@ -17,10 +17,9 @@
                 if (value > _list.Length)
                 {
                     T[] tempArray = new T[value];
-                    Array.Copy(_list, tempArray, value);
+                    Array.Copy(tempArray, _list, _size);
                     _list = tempArray;
                 }
-                _size = value;
             }
         }
 
@@ -32,21 +31,20 @@
             }
             else
             {
-                _size++;
                 if(_size > Capacity)
                 {
                     Capacity *= 2;
                 }
             }
             _list[_size] = elem;
-            _size++;
+            _size += 1;
         }
 
         public void Remove(T elem)
         {
             int cursor = -1;
             bool elemFind = false;
-            for (int i = 0; i < _list.Length; i++)
+            for (int i = 0; i < Capacity; i++)
             {
                 if (_list[i].Equals(elem) && !elemFind)
                 {
@@ -67,7 +65,7 @@
 
         public int Count
         {
-            get { return _list.Length; }
+            get { return Capacity; }
 
         }
         public T GetItems(int index)
