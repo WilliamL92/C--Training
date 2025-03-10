@@ -1,6 +1,6 @@
 ﻿namespace ImplementList
 {
-    public class MyList<T>
+    public class MyList<T> where T : class?
     {
         private T[] _list;
         private int _defaultCapacity = 4;
@@ -14,23 +14,16 @@
         public int Capacity
         {
             get { return _list.Length; }
-            set
+            private set
             {
-                if (value != _list.Length)
+                if (value != _list.Length && value >= Count)
                 {
-                    if (value > 0)
+                    T[] tempArray = new T[value];
+                    if (_count > 0)
                     {
-                        T[] tempArray = new T[value];
-                        if (_count > 0)
-                        {
-                            Array.Copy(_list, tempArray, _count);
-                        }
-                        _list = tempArray;
+                        Array.Copy(_list, tempArray, _count);
                     }
-                    else
-                    {
-                        _list = new T[_defaultCapacity];
-                    }
+                    _list = tempArray;
                 }
             }
         }
@@ -44,7 +37,7 @@
         {
             if (_count >= Capacity)
             {
-                Capacity = Capacity == 0 ? _defaultCapacity : Capacity * 2;
+                Capacity = Capacity * 2;
             }
             _list[_count] = elem;
             _count++;
@@ -65,11 +58,9 @@
             if (index == -1)
                 return false;
 
-            int shiftCount = _count - index - 1;
-
-            if (shiftCount > 0)
+            if (index != _count -1)
             {
-                Array.Copy(_list, index + 1, _list, index, shiftCount);
+                Array.Copy(_list, index + 1, _list, index, _count - index - 1);
             }
             _list[--_count] = default(T);
             return true;

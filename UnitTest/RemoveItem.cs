@@ -17,9 +17,10 @@ namespace UnitTest
             objects.Add("Hello");
             objects.Add("World");
 
-            objects.Remove("Hello");
+            bool result = objects.Remove("Hello");
             Assert.AreEqual(1, objects.Count);
             Assert.AreEqual("World", objects.GetItem(0));
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
@@ -51,9 +52,10 @@ namespace UnitTest
             objects.Add("in");
             objects.Add("Paris");
 
-            objects.Remove("Heyy");
+            bool result = objects.Remove("Heyy");
             Assert.AreEqual(6, objects.Count);
             Assert.AreEqual("Paris", objects.GetItem(5));
+            Assert.IsFalse(result);
         }
     }
 }

@@ -32,6 +32,8 @@ namespace UnitTest
 
             Assert.AreEqual(5, objects.Count);
             Assert.AreEqual("First", objects.GetItem(0));
+            Assert.AreEqual("Second", objects.GetItem(1));
+            Assert.AreEqual("Third", objects.GetItem(2));
         }
 
         [TestMethod]
@@ -51,6 +53,7 @@ namespace UnitTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetItemByIfIndexNotExistTest()
         {
             MyList<string> objects = new MyList<string>();
@@ -63,17 +66,7 @@ namespace UnitTest
             objects.Remove("Five");
 
             Assert.AreEqual(4, objects.Count);
-            string item;
-            Exception except = null;
-            try
-            {
-                item = objects.GetItem(99);
-            }
-            catch (Exception ex)
-            {
-                except = ex;
-            }
-            Assert.IsNotNull(except);
+            objects.GetItem(99);
         }
     }
 }

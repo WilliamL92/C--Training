@@ -2,10 +2,10 @@
 namespace UnitTest
 {
     [TestClass]
-    public class AddItemAddItem
+    public class AddItem
     {
         [TestMethod]
-        public void AddItemListTest()
+        public void AddSingleStringTest()
         {
             MyList<string> objects = new MyList<string>();
             objects.Add("Hello");
@@ -15,7 +15,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void MultipleAddItemsListTest()
+        public void MultipleAddStringsTest()
         {
             MyList<string> objects = new MyList<string>();
             objects.Add("Hello");
